@@ -45,7 +45,7 @@ void Cleaner::Show()
     startTime.Show();
     cout << ";";
     endTime.Show();
-    cout << ";" << provider << ";";
+    cout << ";" << provider << ";" << endl;
 }
 
 Cleaner::Cleaner(string my_id, double my_latitude, double my_longitude, Date my_startTime, Date my_endTime)

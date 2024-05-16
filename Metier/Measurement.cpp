@@ -27,7 +27,7 @@ double Measurement::GetValue()
 void Measurement::Show()
 {
     time.Show();
-    cout << ";" << sensorId << ";" << attribute << ";" << value << ";";
+    cout << ";" << sensorId << ";" << attribute << ";" << value << ";" << endl;
 }
 
 Measurement::Measurement(Date my_time, string my_sensorId, string my_attribute, double my_value)

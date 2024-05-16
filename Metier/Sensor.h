@@ -1,6 +1,6 @@
 
-#if ! defined (SENSOR_H )
-#define SENSOR__H
+#ifndef SENSOR_H 
+#define SENSOR_H
 
 #include <string>
 #include <list>
@@ -21,6 +21,7 @@ public :
     void Show();
 
     Sensor(string my_id, double my_latitude,double my_longitude);
+    Sensor();
     ~Sensor();
 
 protected :

@@ -20,9 +20,10 @@ void Provider::AddCleanerId(string my_cleaner)
     cleaners.push_back(my_cleaner);
 }
 
-Provider::Provider(string my_id)
+Provider::Provider(string my_id, string my_cleaner)
 {
     id=my_id;
+    cleaners.push_back(my_cleaner);
 }
 
 Provider::~Provider()

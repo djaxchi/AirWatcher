@@ -13,7 +13,7 @@ public :
     list<string> GetCleaners();
     void AddCleanerId(string my_cleaner);
 
-    Provider(string my_id);
+    Provider(string my_id, string my_cleaner);
     ~Provider();
 
 protected : 

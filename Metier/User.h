@@ -1,6 +1,6 @@
 
 #if ! defined (USER_H )
-#define USER__H
+#define USER_H
 
 #include <string>
 #include <list>
@@ -21,7 +21,7 @@ public :
 
     void Show();
 
-    User(string my_id);
+    User(string my_id, string my_sensor);
     ~User();
 
 protected :

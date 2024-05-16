@@ -1,6 +1,6 @@
 
-#if ! defined (MEASUREMENT_H )
-#define MEASUREMENT__H
+#ifndef MEASUREMENT_H 
+#define MEASUREMENT_H
 
 #include <string>
 using namespace std;

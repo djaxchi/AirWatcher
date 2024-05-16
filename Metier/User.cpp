@@ -33,7 +33,7 @@ void User::AddPoints(int points)
 
 void User::Show()
 {
-    cout << "User : " << id << endl;
+    cout << "*******User : ******************" << id << endl;
     cout << "    -> Nb de points : " << nbOfPoints << " <-" << endl;
     cout << "Capteurs : " << endl;
     list<string>::iterator sensor = sensors.begin();
@@ -43,10 +43,12 @@ void User::Show()
         cout << endl;
         sensor ++;
     }
+    cout << "****************************************" << endl;
 }
-User::User(string my_id)
+User::User(string my_id, string my_sensor)
 {
     id=my_id;
+    sensors.push_back(my_sensor);
     nbOfPoints=0;
 }
 

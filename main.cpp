@@ -1,27 +1,56 @@
-/*************************************************************************
-                           Main  -  description
-                             -------------------
-    début                : 17/01/2023
-    copyright            : (C) 2023 par Nour ELJADIRI, Marie ROULIER
-    e-mail               : mohamed-nour.eljadiri@insa-lyon.fr
-                           marie.roulier@insa-lyon.fr
-*************************************************************************/
+#include <iostream>
+#include "readCSV.h"
 
-//---------- Réalisation du module <Main> (fichier Main.cpp) ---------------
+int main() {
+    // Assuming your CSV files are located in a folder named "dataset"
+    string folderName = "dataset/";
 
-/////////////////////////////////////////////////////////////////  INCLUDE
-//------------------------------------------------------ Include personnel
-#include "Analog.h"
+    // Create an instance of ReadCSV
+    ReadCSV reader(folderName);
 
-//-------------------------------------------------------- Include système
-using namespace std;
+    // Set paths for each CSV file
+    reader.SetMeasurementsCSV(folderName + "measurements.csv");
+    reader.SetSensorsCSV(folderName + "sensors.csv");
+    reader.SetCleanersCSV(folderName + "cleaners.csv");
+    reader.SetUsersCSV(folderName + "users.csv");
+    reader.SetProvidersCSV(folderName + "providers.csv");
+    reader.SetAttributesCSV(folderName + "attributes.csv");
 
-///////////////////////////////////////////////////////////////////  PRIVE
-//------------------------------------------------------ Fonctions privées
+    // Read data from CSV files
+    list<Measurement> measurements = reader.ReadMeasurements();
+    map<string, Sensor> sensors = reader.ReadSensors();
+    map<string, Cleaner> cleaners = reader.ReadCleaners();
+    map<string, User> users = reader.ReadUsers();
+    map<string, Provider> providers = reader.ReadProviders();
+    map<string, Attribute> attributes = reader.ReadAttributes();
 
-int main ( int argc, char * argv [ ] )
-// Algorithme :
-// Appel à la procédure de test
-{
-    ;
-} //----- fin de main
+
+    // Display some of the data read from CSV files
+
+    cout << "Measurements:" << endl;
+
+    for (auto &measurement : measurements) {
+        measurement.Show();
+    }
+    
+    cout << "Sensors:" << endl;
+
+    for (auto &sensor : sensors) {
+        sensor.second.Show();
+    }
+
+    cout << "Cleaners:" << endl;
+
+    for (auto &cleaner : cleaners) {
+        cleaner.second.Show();
+    }
+    cout << "Users:" << endl;
+
+    for (auto &user : users) {
+        user.second.Show();
+    }
+    
+    
+    
+    return 0;
+}

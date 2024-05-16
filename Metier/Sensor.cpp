@@ -33,7 +33,7 @@ void Sensor::AddMeasurement(Measurement my_measurement)
 
 void Sensor::Show()
 {
-    cout << "======== Capteur : " << id << " ========" << endl;
+    cout << "********* Capteur : " << id << " *******" << endl;
     cout << "    -> Coordonées : " << latitude << ";" << longitude << " <-" << endl;
     cout << "Mesures : " << endl;
     list<Measurement>::iterator measure = measurements.begin();
@@ -43,7 +43,7 @@ void Sensor::Show()
         cout << endl;
         measure ++;
     }
-    cout << "===================================";
+    cout << "****************************************" << endl;
 }
 
 Sensor::Sensor(string my_id, double my_latitude,double my_longitude)
@@ -53,6 +53,7 @@ Sensor::Sensor(string my_id, double my_latitude,double my_longitude)
     longitude=my_longitude;
 
 }
+
 
 Sensor::~Sensor()
 {} 
