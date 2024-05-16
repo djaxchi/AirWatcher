@@ -1,75 +1,71 @@
-/*************************************************************************
-                           ReadCSV  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
-//---------- Réalisation de la classe <ReadCSV> (fichier ReadCSV.cpp) ------------
-
-//---------------------------------------------------------------- INCLUDE
-
-//-------------------------------------------------------- Include système
 #include <iostream>
-using namespace std;
 #include <fstream>
+#include <sstream>
+#include <string>
+#include <map>
+#include <readCSV.h>
 
-//------------------------------------------------------ Include personnel
-#include "ReadCSV.h"
+using namespace std;
 
-//------------------------------------------------------------- Constantes
+struct Sensor {
+    double latitude;
+    double longitude;
+};
 
-//----------------------------------------------------------------- PUBLIC
+struct Measurement {
+    string sensorID;
+    string attributeID;
+    double value;
+};
 
-//----------------------------------------------------- Méthodes publiques
-// type ReadCSV::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+struct Attribute {
+    string unit;
+    string description;
+};
 
+class readCSV {
+public:
+    map<string, Sensor> ReadSensors(const string& filename) {
+        map<string, Sensor> sensors;
+        ifstream file(filename);
+        string line;
+        while (getline(file, line)) {
+            istringstream iss(line);
+            string sensorID;
+            char delimiter;
+            double latitude, longitude;
+            iss >> sensorID >> delimiter >> latitude >> delimiter >> longitude;
+            sensors[sensorID] = {latitude, longitude};
+        }
+        return sensors;
+    }
 
-//------------------------------------------------- Surcharge d'opérateurs
-ReadCSV & ReadCSV::operator = ( const ReadCSV & unReadCSV )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
+    map<string, Measurement> ReadMeasurements(const string& filename) {
+        map<string, Measurement> measurements;
+        ifstream file(filename);
+        string line;
+        while (getline(file, line)) {
+            istringstream iss(line);
+            string timestamp, sensorID, attributeID;
+            char delimiter;
+            double value;
+            iss >> timestamp >> delimiter >> sensorID >> delimiter >> attributeID >> delimiter >> value;
+            measurements[timestamp] =  {sensorID, attributeID, value};
+        }
+        return measurements;
+    }
 
-
-//-------------------------------------------- Constructeurs - destructeur
-ReadCSV::ReadCSV ( const ReadCSV & unReadCSV )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <ReadCSV>" << endl;
-#endif
-} //----- Fin de ReadCSV (constructeur de copie)
-
-
-ReadCSV::ReadCSV ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <ReadCSV>" << endl;
-#endif
-} //----- Fin de ReadCSV
-
-
-ReadCSV::~ReadCSV ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <ReadCSV>" << endl;
-#endif
-} //----- Fin de ~ReadCSV
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
-
+    map<string, Attribute> ReadAttributes(const string& filename) {
+        map<string, Attribute> attributes;
+        ifstream file(filename);
+        string line;
+        while (getline(file, line)) {
+            istringstream iss(line);
+            string attributeID, unit, description;
+            char delimiter;
+            iss >> attributeID >> delimiter >> unit >> delimiter >> description;
+            attributes[attributeID] = {unit, description};
+        }
+        return attributes;
+    }
+};

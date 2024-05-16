@@ -1,0 +1,24 @@
+
+#if ! defined (PROVIDER_H )
+#define PROVIDER_H
+
+#include <string>
+#include <list>
+using namespace std;
+
+class Provider 
+{
+public :
+    string GetId();
+    list<string> GetCleaners();
+    void AddCleanerId(string my_cleaner);
+
+    Provider(string my_id);
+    ~Provider();
+
+protected : 
+    string id;
+    list<string> cleaners;
+};
+
+#endif 

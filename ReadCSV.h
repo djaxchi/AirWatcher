@@ -1,76 +1,36 @@
-/*************************************************************************
-                           ReadCSV  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
 
-//---------- Interface de la classe <ReadCSV> (fichier ReadCSV.h) ----------------
-#if ! defined ( ReadCSV_H )
-#define ReadCSV_H
+#if ! defined ( readCSV_H )
+#define readCSV_H
 
-//--------------------------------------------------- Interfaces utilisées
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <map>
 
-//------------------------------------------------------------- Constantes
+using namespace std;
 
-//------------------------------------------------------------------ Types
-
-//------------------------------------------------------------------------
-// Rôle de la classe <ReadCSV>
-//
-//
-//------------------------------------------------------------------------
-
-class ReadCSV 
-{
-//----------------------------------------------------------------- PUBLIC
-
-public:
-//----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-    ReadCSV & operator = ( const ReadCSV & unReadCSV );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    ReadCSV ( const ReadCSV & unReadCSV );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    ReadCSV ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    virtual ~ReadCSV ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-//------------------------------------------------------------------ PRIVE
-
-protected:
-//----------------------------------------------------- Méthodes protégées
-
-//----------------------------------------------------- Attributs protégés
-
+struct Sensor {
+    double latitude;
+    double longitude;
 };
 
-//-------------------------------- Autres définitions dépendantes de <ReadCSV>
+struct Measurement {
+    string sensorID;
+    string attributeID;
+    double value;
+};
+
+struct Attribute {
+    string unit;
+    string description;
+};
+
+class ReadCSV {
+public:
+    map<string, Sensor> ReadSensors(const string& filename);
+    map<string, Measurement> ReadMeasurements(const string& filename);
+    map<string, Attribute> ReadAttributes(const string& filename);
+};
 
 #endif // ReadCSV_H
